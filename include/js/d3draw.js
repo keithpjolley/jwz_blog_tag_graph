@@ -104,9 +104,10 @@ drawgraph = (container, graph, width=300, height=300) => {
     .selectAll('line')
     .data(graph.links)
     .enter().append('line')
-      .attr('class', d => 'comm_' + nclut[d.source])
+      // Either method, the link color is the same as the 'source'
       /* zawinskification
       .attr('stroke', d => nodeColor(nclut[d.source]))  */
+      .attr('class', d => 'comm_' + nclut[d.source])
       .style('stroke-width', d => linkWidth(d.betweenness))
       .style('stroke-opacity', d => linkAlpha(d.betweenness));
 
