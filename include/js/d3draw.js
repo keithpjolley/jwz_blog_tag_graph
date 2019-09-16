@@ -69,6 +69,10 @@ drawgraph = (container, graph, width=300, height=300) => {
         .attr('height', height);
   }
 
+  // https://github.com/gopeter/semantic-diagrams/blob/ad630ba1566bbaba622e317732d9d90a2f281fab/static/js/app.js#L132
+  // https://www.w3.org/TR/SVG2/linking.html#URLandURI
+  $('svg').attr('xmlns', 'http://www.w3.org/2000/svg');
+
   var simulation = d3.forceSimulation()
       .force('center',  d3.forceCenter(width/2, height/2))
       .force('collide', d3.forceCollide()
@@ -110,8 +114,10 @@ drawgraph = (container, graph, width=300, height=300) => {
     .attr('class', 'nodes')
     .selectAll('g')
     .data(graph.nodes)
-    .enter().append('g')
-      //.attr('radius', d => d.radius);
+    .enter().append('a')
+      .attr("xlink:href", d => 'https://www.jwz.org/blog/tag/' + d.id + '/')
+
+    node.append('g')
 
   var circles = node.append('circle')
     .attr('class', d => 'comm_' + d.community)
