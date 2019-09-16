@@ -1,0 +1,88 @@
+table.dataTable thead tr th {
+  text-align: left;
+  vertical-align: bottom;
+}
+
+
+#tabdiv .dataTables_wrapper .dataTables_info,
+#tabdiv a.paginate_button.previous.disabled,
+#nodetab_next,
+#nodetab_paginate > span > a,
+#nodetab_paginate > span > span,
+#edgetab_next,
+#edgetab_paginate > span > a,
+#edgetab_paginate > span > span,
+label {
+  color: #0f0 !important; /* because datatables includes !important. :/ */
+}
+
+table.dataTable tbody tr.even,
+table.dataTable.display tbody tr.even>.sorting_1 {
+  background-color: #000 !important;
+}
+
+html body div #tabdiv div.dataTables_paginate.paging_simple_numbers span a.paginate_button.current,
+#nodetab_paginate > span > a.paginate_button.current,
+#edgetab_paginate > span > a.paginate_button.current,
+input,
+select {
+  color: #000 !important;
+  background-color: #0f0 !important;
+}
+
+table.dataTable tbody tr.odd,
+table.dataTable.display tbody tr.odd>.sorting_1 {
+  background-color: #222 !important;
+}
+
+.nodes .comm_0 {
+  fill: #0f0;
+  stroke: #0a0;
+}
+.links .comm_0 {
+  stroke: #0f0;
+}
+
+.nodes .comm_1 {
+  fill: #ff0;
+  stroke: #ff0;
+}
+.links .comm_1 {
+  stroke: #ff0;
+}
+
+.nodes .comm_2 {
+  fill: #0ff;
+  stroke: #0ff;
+}
+.links .comm_2 {
+  stroke: #0ff;
+}
+
+.nodes .comm_3 {
+  fill: #f0f;
+  stroke: #f0f;
+}
+.links .comm_3 {
+  stroke: #f0f;
+}
+
+.nodes .comm_4 {
+  fill: #888;
+  stroke: #888;
+}
+.links .comm_4 {
+  stroke: #888;
+}
+
+div.tooltip {
+  position: absolute;		
+  width: 260px;				
+  height: 4.5em;				
+  padding: 0.5em;			
+  background: #000;
+  border: 1px solid #0f0;
+  border-radius: 8px;
+  pointer-events: none;		
+  text-align: left;
+}
