@@ -39,19 +39,42 @@
       $('#nodetab').DataTable({
         'data': graph['nodes'],
         'columns': [
-          {'data': 'id',        'title': 'Tag'},
-          {'data': 'pagerank',  'title': 'PageRank'},
-          {'data': 'eic',       'title': 'Eigenvector<br>Centrality'},
-          {'data': 'community', 'title': 'Community'}
-        ]
+          {'data': 'id',            'title': 'Tag'},
+          {'data': 'pagerank',      'title': 'PageRank<br>(Value)'},
+          {'data': 'pagerank_rank', 'title': 'PageRank<br>(Ordinal)'},
+          {'data': 'eic',           'title': 'Eigenvector<br>Centrality'},
+          {'data': 'eic_rank',      'title': 'Eigenvector<br>(Ordinal)'},
+          {'data': 'community',     'title': 'Community'}
+        ],
+        'createdRow': (row, data) => {
+            $(row).addClass('comm_' + data['community'])
+        }
       });
       $('#edgetab').DataTable({
         'data': graph['links'],
         'columns': [
-          {'data': 'source.id',   'title': 'Source'},
-          {'data': 'target.id',   'title': 'Target'},
-          {'data': 'weight',      'title': 'Links'},
-          {'data': 'betweenness', 'title': 'Betweenness'}
+          {'data': 'source.id',        'className': 'source_col', 'title': 'Source'},
+          {'data': 'target.id',        'className': 'target_col', 'title': 'Target'},
+          {'data': 'weight',           'className': 'link_col',   'title': 'Link Count'},
+          {'data': 'weight_rank',      'className': 'linkr_col',  'title': 'Link Count<br>(Ordinal)'},
+          {'data': 'betweenness',      'className': 'b_col',      'title': 'Betweenness'},
+          {'data': 'betweenness_rank', 'className': 'br_col',     'title': 'Betweenness<br>(Ordinal)'}
+        ],
+        'columnDefs': [
+          {
+            //'targets': 'source_col', // this didn't work as advertised
+            'targets': 0,
+            'createdCell': (td, cellData, rowData, row, col) => {
+              $(td).addClass('comm_' + rowData.source.community)
+            }
+          },
+          {
+            //'targets': 'target_col',
+            'targets': 1,
+            'createdCell': (td, cellData, rowData, row, col) => {
+              $(td).addClass('comm_' + rowData.target.community)
+            }
+          }
         ]
       });
     });

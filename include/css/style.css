@@ -45,6 +45,10 @@ table.dataTable.display tbody tr.odd>.sorting_1 {
   fill: none;
   fill-opacity: 0.0;
 }
+td.comm_0,
+tr.comm_0 {
+  color: #0f0;
+}
 
 .nodes .comm_1 {
   fill: #ff0;
@@ -55,6 +59,10 @@ table.dataTable.display tbody tr.odd>.sorting_1 {
   stroke: #ff0;
   fill: none;
   fill-opacity: 0.0;
+}
+td.comm_1,
+tr.comm_1 {
+  color: #ff0;
 }
 
 .nodes .comm_2 {
@@ -67,6 +75,10 @@ table.dataTable.display tbody tr.odd>.sorting_1 {
   fill: none;
   fill-opacity: 0.0;
 }
+td.comm_2,
+tr.comm_2 {
+  color: #0ff;
+}
 
 .nodes .comm_3 {
   fill: #f0f;
@@ -78,16 +90,24 @@ table.dataTable.display tbody tr.odd>.sorting_1 {
   fill: none;
   fill-opacity: 0.0;
 }
+td.comm_3,
+tr.comm_3 {
+  color: #f0f;
+}
 
 .nodes .comm_4 {
-  fill: #888;
-  stroke: #666;
+  fill: #aaa;
+  stroke: #888;
   stroke-width: 3;
 }
 .links .comm_4 {
-  stroke: #888;
+  stroke: #aaa;
   fill: none;
   fill-opacity: 0.0;
+}
+td.comm_4,
+tr.comm_4 {
+  color: #aaa;
 }
 
 div.tooltip {
