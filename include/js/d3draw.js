@@ -5,14 +5,16 @@ drawgraph = (container, graph, width=300, height=300) => {
 
   var prNorm = d3.scaleLinear()
     .domain(d3.extent(graph.nodes.map(d => d.pagerank)))
+    .range([0, 1]);
 
   var eicNorm = d3.scaleLinear()
     .domain(d3.extent(graph.nodes.map(d => d.eic)))
+    .range([0, 1]);
 
   // Change this to favor PageRank or EIC
   var nodeRadius = d3.scaleLinear()
     .domain([0, 2]) /* Not necessarily true */
-    .range([10, 30]);  /* min/max size of nodes in px */
+    .range([5, 25]);  /* min/max size of nodes in px */
 
   var linkWidth = d3.scalePow()
     .domain(d3.extent(graph.links.map(d => d.betweenness)))
@@ -55,6 +57,7 @@ drawgraph = (container, graph, width=300, height=300) => {
   var nclut = {}; // node-community lookup table
   graph.nodes.forEach(d => {
     d.radius = nodeRadius(prNorm(d.pagerank) + eicNorm(d.eic));
+    console.log(d.radius);
     nclut[d.id] = d.community;
   })
 
