@@ -10,9 +10,6 @@ import requests
 from bs4 import BeautifulSoup
 from sklearn.preprocessing import minmax_scale
 
-min_r, max_r = 6, 20   # min/max radius of nodes
-min_w, max_w = 0.5, 2  # min/max width of edges
-
 def makegraph(data):
     # The worst place to do this. Done in <strike>d3</strike> css.
     #color = lambda c,n : "#%02x%02x%02x" % tuple(int(255*c)
@@ -52,12 +49,19 @@ def getdata(url):
     # brittle
     jscript = soup.findAll('script')[2].get_text()
     def str2json(gp, text):
-        # get the assignment we want
-        s = re.sub(r'^.* var ' + gp + r' = new vis.DataSet \(\[([^\]]*),\s*\]\).*',
-                    r'{' + gp + r': [\1]}', text, flags=re.DOTALL)
+        # Get the assignment we want
+        # jwz is actively updating the source site. :/
+        #s = re.sub(r'^.* var ' + gp + r' = new vis.DataSet \(\[([^\]]*),\s*\]\).*',
+        #            r'{' + gp + r': [\1]}', text, flags=re.DOTALL)
+        # Not my best regex. Should do look aheads to make sure there's not any
+        # embedded matches in the data.  v2.
+        s = re.sub(r'^.*\s+var\s+' + gp + '\s=\s(\[\s*{[^\]]*},?\s*\]).*',
+                        r'\1', text, flags=re.DOTALL)
         # put keys in quotes
         s = re.sub(r'(\w*):', r'"\1":', s)
-        return json.loads(s)
+        # delete that last ','
+        s = re.sub(r'},\s*]$', r'}]', s, flags=re.DOTALL)
+        return json.loads('{"' + gp + '":' + s + '}')
     data = str2json('nodes', jscript)
     data.update(str2json('edges', jscript))
     return data
