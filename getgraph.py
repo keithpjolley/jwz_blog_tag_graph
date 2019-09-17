@@ -21,9 +21,9 @@ def makegraph(data):
     nodes = {node['id']: node['label'] for node in data['nodes']}
     for edge in data['edges']:
         if edge['from'] not in nodes:
-            nodes[edge['from']] = '## tag {} REDACTED FOR YOUR SAFETY ##'.format(edge['from'])
+            nodes[edge['from']] = 'TAG "{}" REDACTED FOR YOUR SAFETY'.format(edge['from'])
         if edge['to'] not in nodes:
-            nodes[edge['to']] = '## tag {} REDACTED FOR YOUR SAFETY ##'.format(edge['to'])
+            nodes[edge['to']] = 'TAG {} REDACTED FOR YOUR SECURITY'.format(edge['to'])
     edges = [(nodes[edge['from']], nodes[edge['to']], {'weight': edge['value']})
                 for edge in data['edges']]
     #G = nx.DiGraph()  # not a directed graph

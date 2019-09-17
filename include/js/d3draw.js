@@ -14,7 +14,7 @@ drawgraph = (container, graph, width=300, height=300) => {
   // Change this to favor PageRank or EIC
   var nodeRadius = d3.scaleLinear()
     .domain([0, 2]) /* Not necessarily true */
-    .range([5, 25]);  /* min/max size of nodes in px */
+    .range([7, 25]);  /* min/max size of nodes in px */
 
   var linkWidth = d3.scalePow()
     .domain(d3.extent(graph.links.map(d => d.betweenness)))

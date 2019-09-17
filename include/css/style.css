@@ -38,6 +38,7 @@ table.dataTable.display tbody tr.odd>.sorting_1 {
 .nodes .comm_0 {
   fill: #0f0;
   stroke: #0a0;
+  stroke-width: 3;
 }
 .links .comm_0 {
   stroke: #0f0;
@@ -45,7 +46,8 @@ table.dataTable.display tbody tr.odd>.sorting_1 {
 
 .nodes .comm_1 {
   fill: #ff0;
-  stroke: #ff0;
+  stroke: #aa0;
+  stroke-width: 3;
 }
 .links .comm_1 {
   stroke: #ff0;
@@ -53,7 +55,8 @@ table.dataTable.display tbody tr.odd>.sorting_1 {
 
 .nodes .comm_2 {
   fill: #0ff;
-  stroke: #0ff;
+  stroke: #0aa;
+  stroke-width: 3;
 }
 .links .comm_2 {
   stroke: #0ff;
@@ -61,7 +64,8 @@ table.dataTable.display tbody tr.odd>.sorting_1 {
 
 .nodes .comm_3 {
   fill: #f0f;
-  stroke: #f0f;
+  stroke: #a0a;
+  stroke-width: 3;
 }
 .links .comm_3 {
   stroke: #f0f;
@@ -69,7 +73,8 @@ table.dataTable.display tbody tr.odd>.sorting_1 {
 
 .nodes .comm_4 {
   fill: #888;
-  stroke: #888;
+  stroke: #666;
+  stroke-width: 3;
 }
 .links .comm_4 {
   stroke: #888;
