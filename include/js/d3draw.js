@@ -1,5 +1,8 @@
 drawgraph = (container, graph, width=300, height=300) => {
 
+  const r_min = 7,
+        r_max = 25;
+
   /* This isn't used to zawinskify the look. Colors come from css instead. Less portable. */
   var nodeColor = d3.scaleOrdinal(d3.schemeDark2);
 
@@ -14,7 +17,7 @@ drawgraph = (container, graph, width=300, height=300) => {
   // Change this to favor PageRank or EIC
   var nodeRadius = d3.scaleLinear()
     .domain([0, 2]) /* Not necessarily true */
-    .range([7, 25]);  /* min/max size of nodes in px */
+    .range([r_min, r_max]);  /* min/max size of nodes in px */
 
   var linkWidth = d3.scalePow()
     .domain(d3.extent(graph.links.map(d => d.betweenness)))
@@ -43,21 +46,40 @@ drawgraph = (container, graph, width=300, height=300) => {
   }
 
   ticked = (d) => {
+    /* Straight links.
     link
       .attr('x1', d => d.source.x)
       .attr('y1', d => d.source.y)
       .attr('x2', d => d.target.x)
       .attr('y2', d => d.target.y);
-    node
-      .attr('transform', d => {
+    */
+    // Curvy links the kids like these days.
+    const bumper = r_max*2;
+    const lim = (v,c) => Math.min(Math.max(v, bumper), c-bumper);
+    link.attr("d", d => {
+        d.target.x = lim(d.target.x, width);
+        d.target.y = lim(d.target.y, height);
+        d.source.x = lim(d.source.x, width);
+        d.source.y = lim(d.source.y, height);
+        const dx = d.target.x - d.source.x,
+            dy = d.target.y - d.source.y,
+            dr = 0.85*Math.sqrt(dx * dx + dy * dy);
+        return "M" +
+            d.source.x + "," +
+            d.source.y + "A" +
+            dr + "," + dr + " 0 0,1 " +
+            d.target.x + "," +
+            d.target.y;
+    });
+
+    node.attr('transform', d => {
         return 'translate(' + d.x + ',' + d.y + ')';
-      })
+    });
   }
 
   var nclut = {}; // node-community lookup table
   graph.nodes.forEach(d => {
     d.radius = nodeRadius(prNorm(d.pagerank) + eicNorm(d.eic));
-    console.log(d.radius);
     nclut[d.id] = d.community;
   })
 
@@ -104,9 +126,9 @@ drawgraph = (container, graph, width=300, height=300) => {
 
   var link = svg.append('g')
     .attr('class', 'links')
-    .selectAll('line')
+    .selectAll('path')
     .data(graph.links)
-    .enter().append('line')
+    .enter().append('path')
       // Either method, the link color is the same as the 'source'
       /* zawinskification
       .attr('stroke', d => nodeColor(nclut[d.source]))  */
