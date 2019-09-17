@@ -2,7 +2,7 @@
 # -*- coding: UTF8 -*-
 
 #import colorsys
-import community
+import community  # pip install python-louvain
 import json
 import networkx as nx
 import re
